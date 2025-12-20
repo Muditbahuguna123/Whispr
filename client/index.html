@@ -10,19 +10,26 @@
 <body>
     <!-- Login page -->
     <div id="login-page">
-        <h2>Login</h2>
         <form id="login-form">
-            <label for="">Username : </label>
-            <input type="text" id="username">
-            <label for="">Password</label>
-            <input type="password" id="password">
-            <button type="submit">Login</button>
+            <h2>Login</h2>
+            <div>
+                <label for="">Username : </label>
+                <input type="text" id="username">
+            </div>
+            <div>
+                <label for="">Password : </label>
+                <input type="password" id="password">
+            </div>
+            <div>
+                <button type="submit">Login</button>
+            </div>
         </form>
     </div>
 
     <!-- main page -->
-    <div id="main-page">
+    <div id="main-page" class="hidden">
         <h1>Welcome to Whispr</h1>
+        <button onclick="logout()">Logout</button>
     </div>
 
 

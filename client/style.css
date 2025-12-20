@@ -1,3 +1,25 @@
-#main-page{
-    display: none;
+
+#login-page{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 80vh;
+
+}
+
+#login-form{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    
+    border: 8px solid saddlebrown;
+    border-radius: 10px;
+    width: 33vh;
+    height: 37vh;
+}
+
+.hidden{
+    display: none !important; /*since the "#login-page" had more specifity so added this to make this important and override the other*/
 }

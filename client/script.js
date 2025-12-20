@@ -13,10 +13,30 @@ login_form.addEventListener("submit", function(e){
     {
         let login_page = document.getElementById("login-page");
         let main_page = document.getElementById("main-page");
-        login_page.style.display = "none";
-        main_page.style.display = "block";
+        login_page.classList.add("hidden");
+        main_page.classList.remove("hidden");
+        localStorage.setItem("isLoggedIn", "true");
     }
     else{
         alert('Wrong password');
     }
 });
+
+function logout()
+{
+    localStorage.removeItem("isLoggedIn");
+    let login_page = document.getElementById("login-page");
+    let main_page = document.getElementById("main-page");
+    login_page.classList.remove("hidden");
+    main_page.classList.add("hidden");
+}
+
+window.onload = ()=>{
+    if(localStorage.getItem("isLoggedIn") === "true")
+    {
+        let login_page = document.getElementById("login-page");
+        let main_page = document.getElementById("main-page");
+        login_page.classList.add("hidden");
+        main_page.classList.remove("hidden");
+    }
+}
