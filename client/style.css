@@ -36,6 +36,8 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    justify-content: end;
+    height: 70vh;
 }
 .message{
     max-width: 70%;
