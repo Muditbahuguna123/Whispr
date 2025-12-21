@@ -23,3 +23,56 @@
 .hidden{
     display: none !important; /*since the "#login-page" had more specifity so added this to make this important and override the other*/
 }
+
+#main-page{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.chat-messages{
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+.message{
+    max-width: 70%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.message.left {
+  align-self: flex-start;
+}
+
+.message.right {
+  align-self: flex-end;
+  text-align: right;
+}
+
+.bubble {
+  padding: 10px;
+  border-radius: 10px;
+  background: #e5e5ea;
+}
+
+.sender {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-bottom: 2px;
+}
+
+.chat-input {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 8px;
+}
+

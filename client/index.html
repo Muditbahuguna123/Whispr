@@ -28,8 +28,27 @@
 
     <!-- main page -->
     <div id="main-page" class="hidden">
-        <h1>Welcome to Whispr</h1>
-        <button onclick="logout()">Logout</button>
+        <header>Welcome to Whispr.</header>
+        <main id="chat">
+            <div class="chat-messages">
+                <!-- other messages -->
+                <div class="message left">
+                    <div class="sender">Alice</div>
+                    <div class="bubble">Hi</div>
+                </div>
+                <!-- my messages -->
+                <div class="message right">
+                    <div class="sender">You</div>
+                    <div class="bubble">Hi</div>
+                </div>
+            </div>
+            <form class="chat-input" id="chat-form">
+                <input type="text" placeholder="Type your message..." id="message-input">
+                <button type="submit">send</button>
+            </form>
+
+            <button onclick="logout()">Logout</button>
+        </main>
     </div>
 
 
