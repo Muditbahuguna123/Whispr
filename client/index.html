@@ -44,7 +44,7 @@
             </div>
             <form class="chat-input" id="chat-form">
                 <input type="text" placeholder="Type your message..." id="message-input">
-                <button type="submit">send</button>
+                <button type="submit" id="send-btn">send</button>
             </form>
 
             <button onclick="logout()">Logout</button>
@@ -52,7 +52,10 @@
     </div>
 
 
-
+    <!-- Socket.io -->
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <!-- CryptoJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

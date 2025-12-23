@@ -40,3 +40,55 @@ window.onload = ()=>{
         main_page.classList.remove("hidden");
     }
 }
+
+//socket working
+
+const socket = io("http://localhost:3000");
+const SECRET_KEY = "whispr-secret-key";
+
+function encryptMessage(message) {
+  return CryptoJS.AES.encrypt(message, SECRET_KEY).toString();
+}
+function decryptMessage(cipherText) {
+  const bytes = CryptoJS.AES.decrypt(cipherText, SECRET_KEY);
+  return bytes.toString(CryptoJS.enc.Utf8);
+}
+
+const chatForm = document.getElementById("chat-form");
+const messageInput = document.getElementById('message-input');
+
+chatForm.addEventListener("submit", (e)=>{
+    e.preventDefault();
+    const message = messageInput.value.trim();
+    if(!message)
+    {
+        return;
+    }
+    const encryptedMessage = encryptMessage(message);
+    socket.emit("send-message", encryptedMessage);
+    addMessage("You", message, "right");
+    messageInput.value = "";
+});
+
+socket.on("receive-message", (encryptedMessage)=>{
+    const decryptedMessage = decryptMessage(encryptedMessage);
+    addMessage("Friend", decryptedMessage, "left");
+});
+
+function addMessage(sender, text, side){
+    const messages = document.querySelector(".chat-messages");
+    const messageDiv = document.createElement("div");
+    messageDiv.classList.add("message", side);
+
+    const senderDiv = document.createElement("div");
+    senderDiv.classList.add("sender");
+    senderDiv.innerText = sender;
+
+    const bubbleDiv = document.createElement("div");
+    bubbleDiv.classList.add("bubble");
+    bubbleDiv.innerText = text;
+
+    messageDiv.append(senderDiv, bubbleDiv);
+    messages.appendChild(messageDiv);
+    messages.scrollTop = messages.scrollHeight; //auto scroll to bottom
+}

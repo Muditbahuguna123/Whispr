@@ -1,6 +1,6 @@
 const express = require('express');
 const http = require("http");
-const {server} = require("socket.io") //“From the socket.io package, take only the thing called Server.”
+const {Server} = require("socket.io") //“From the socket.io package, take only the thing called Server.”
 
 const app = express();
 const server = http.createServer(app);
