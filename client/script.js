@@ -1,13 +1,14 @@
 let login_form = document.getElementById("login-form");
 let login_page = document.getElementById("login-page");
 let main_page = document.getElementById("main-page");
+let username = "";
 login_form.addEventListener("submit", function(e){
     e.preventDefault();
     /*What does e.preventDefault() actually do?
     👉 It stops the browser’s default behavior for that event.
     In a form submission, the browser’s default behavior is:
     ❌ Submit the form → reload the page → send data to a URL*/
-    const username = document.getElementById("username").value;
+    username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
     if(password === "1234") //Because everything coming from an HTML input field is a STRING, not a number.
     {
@@ -15,7 +16,7 @@ login_form.addEventListener("submit", function(e){
         let main_page = document.getElementById("main-page");
         login_page.classList.add("hidden");
         main_page.classList.remove("hidden");
-        localStorage.setItem("isLoggedIn", "true");
+        sessionStorage.setItem("isLoggedIn", "true");
     }
     else{
         alert('Wrong password');
@@ -24,7 +25,7 @@ login_form.addEventListener("submit", function(e){
 
 function logout()
 {
-    localStorage.removeItem("isLoggedIn");
+    sessionStorage.removeItem("isLoggedIn");
     let login_page = document.getElementById("login-page");
     let main_page = document.getElementById("main-page");
     login_page.classList.remove("hidden");
@@ -32,7 +33,7 @@ function logout()
 }
 
 window.onload = ()=>{
-    if(localStorage.getItem("isLoggedIn") === "true")
+    if(sessionStorage.getItem("isLoggedIn") === "true")
     {
         let login_page = document.getElementById("login-page");
         let main_page = document.getElementById("main-page");
@@ -65,14 +66,16 @@ chatForm.addEventListener("submit", (e)=>{
         return;
     }
     const encryptedMessage = encryptMessage(message);
-    socket.emit("send-message", encryptedMessage);
+    socket.emit("send-message", {
+        user: username,
+        message: encryptedMessage});
     addMessage("You", message, "right");
     messageInput.value = "";
 });
 
-socket.on("receive-message", (encryptedMessage)=>{
-    const decryptedMessage = decryptMessage(encryptedMessage);
-    addMessage("Friend", decryptedMessage, "left");
+socket.on("receive-message", (data)=>{
+    const decryptedMessage = decryptMessage(data.message);
+    addMessage(data.user, decryptedMessage, "left");
 });
 
 function addMessage(sender, text, side){
